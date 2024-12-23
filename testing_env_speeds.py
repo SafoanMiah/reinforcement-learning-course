@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore")
 
 if __name__ == '__main__':
 
-    enviroment_name = 'CarRacing'
+    enviroment_name = "CartPole-v1"
 
     def make_env():
         return gym.make(enviroment_name)
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     def benchmark(env, device, total_timesteps=500):
         print(f"Running training on {type(env).__name__} with device: {device}...")
         start_time = time.time()
-        model = PPO('CnnPolicy', env, device=device, verbose=0)  # Set device (CPU or GPU)
+        model = PPO('MlpPolicy', env, device=device, verbose=0)  # Set device (CPU or GPU)
         model.learn(total_timesteps=total_timesteps)  # Train the model
         mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=5, deterministic=True)
         env.close()
